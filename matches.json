@@ -1,0 +1,17 @@
+{
+  "tournament": "FIFA World Cup 2026",
+  "matches": [
+    {
+      "id": 1,
+      "stage": "Group A",
+      "kickoffUtc": "2026-06-11T19:00:00Z",
+      "venue": {
+        "city": "Mexico City",
+        "stadium": "Estadio Azteca",
+        "tz": "America/Mexico_City"
+      },
+      "home": { "code": "MX", "name": "Mexico" },
+      "away": { "code": "TBD", "name": "TBD" }
+    }
+  ]
+}
