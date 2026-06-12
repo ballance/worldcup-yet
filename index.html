@@ -1398,6 +1398,121 @@
       if (e.target.id === 'boss-close') toggleBoss();
     });
 
+    /* === My Teams (favorite + watchlist) === */
+    (function() {
+      const STORAGE_KEY = 'worldcupyet.teams';
+      const WATCHLIST_MAX = 3;
+
+      let state = { favorite: null, watchlist: [] };
+      const subscribers = new Set();
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object') throw new Error('bad shape');
+          const fav = typeof parsed.favorite === 'string' ? parsed.favorite : null;
+          const watch = Array.isArray(parsed.watchlist)
+            ? parsed.watchlist.filter(function(c) { return typeof c === 'string'; }).slice(0, WATCHLIST_MAX)
+            : [];
+          state = { favorite: fav, watchlist: watch };
+        } catch (e) {
+          console.warn('MyTeams: resetting corrupted storage:', e);
+          try { localStorage.removeItem(STORAGE_KEY); } catch (e2) { /* ignore */ }
+          state = { favorite: null, watchlist: [] };
+        }
+      }
+
+      function persist() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          console.error('MyTeams: localStorage write failed:', e);
+        }
+      }
+
+      function notify() {
+        subscribers.forEach(function(fn) {
+          try { fn(); } catch (e) { console.error('MyTeams subscriber error:', e); }
+        });
+      }
+
+      function get() {
+        return { favorite: state.favorite, watchlist: state.watchlist.slice() };
+      }
+
+      function setFavorite(code) {
+        if (code === 'TBD') return;
+        if (code && state.watchlist.indexOf(code) >= 0) {
+          state.watchlist = state.watchlist.filter(function(c) { return c !== code; });
+        }
+        state.favorite = code || null;
+        persist();
+        notify();
+      }
+
+      function addWatchlist(code) {
+        if (code === 'TBD' || !code) return;
+        if (state.favorite === code) return;
+        if (state.watchlist.indexOf(code) >= 0) return;
+        if (state.watchlist.length >= WATCHLIST_MAX) return;
+        state.watchlist = state.watchlist.concat([code]);
+        persist();
+        notify();
+      }
+
+      function removeWatchlist(code) {
+        if (state.watchlist.indexOf(code) < 0) return;
+        state.watchlist = state.watchlist.filter(function(c) { return c !== code; });
+        persist();
+        notify();
+      }
+
+      function cycle(code) {
+        if (code === 'TBD' || !code) return;
+        if (state.favorite === code) {
+          state.favorite = null;
+          persist();
+          notify();
+          return;
+        }
+        if (state.watchlist.indexOf(code) >= 0) {
+          state.watchlist = state.watchlist.filter(function(c) { return c !== code; });
+          state.favorite = code;
+          persist();
+          notify();
+          return;
+        }
+        if (state.watchlist.length >= WATCHLIST_MAX) {
+          state.favorite = code;
+          persist();
+          notify();
+          return 'promoted';
+        }
+        state.watchlist = state.watchlist.concat([code]);
+        persist();
+        notify();
+      }
+
+      function onChange(fn) {
+        subscribers.add(fn);
+        return function() { subscribers.delete(fn); };
+      }
+
+      load();
+
+      window.MyTeams = {
+        get: get,
+        setFavorite: setFavorite,
+        addWatchlist: addWatchlist,
+        removeWatchlist: removeWatchlist,
+        cycle: cycle,
+        onChange: onChange,
+        // openPicker added in Task 3
+      };
+    })();
+
     /* === Daily Matches Panel === */
     (function() {
       const MATCHES_URL = 'matches.json?v=20260611';
