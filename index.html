@@ -709,6 +709,56 @@
     .match-watch {
       border-color: rgba(255, 215, 0, 0.55);
     }
+    .match .team .name.clickable {
+      background: transparent;
+      border: none;
+      color: inherit;
+      font: inherit;
+      font-weight: inherit;
+      padding: 0;
+      cursor: pointer;
+      text-align: inherit;
+    }
+    .match .team .name.clickable:hover,
+    .match .team .name.clickable:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    #myteams-popover {
+      position: absolute;
+      z-index: 10003;
+      background: #0a1128;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      border-radius: 8px;
+      padding: 4px;
+      min-width: 180px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: white;
+    }
+    #myteams-popover button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: inherit;
+      font: inherit;
+      padding: 6px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #myteams-popover button:hover:not(:disabled),
+    #myteams-popover button:focus-visible {
+      background: rgba(255, 215, 0, 0.15);
+      outline: none;
+    }
+    #myteams-popover button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
 
     .match .team {
       display: flex;
@@ -1896,6 +1946,102 @@
         init();
       }
 
+      function closePopover() {
+        const pop = document.getElementById('myteams-popover');
+        if (pop) pop.remove();
+        document.removeEventListener('click', popoverOutsideClick, true);
+        document.removeEventListener('keydown', popoverEsc, true);
+      }
+
+      function popoverOutsideClick(e) {
+        const pop = document.getElementById('myteams-popover');
+        if (pop && !pop.contains(e.target) && !e.target.classList.contains('name')) {
+          closePopover();
+        }
+      }
+
+      function popoverEsc(e) {
+        if (e.key === 'Escape') closePopover();
+      }
+
+      function openPopover(triggerEl, code, name) {
+        closePopover();
+        const isFav = state.favorite === code;
+        const isWatch = state.watchlist.indexOf(code) >= 0;
+        const watchFull = state.watchlist.length >= WATCHLIST_MAX;
+
+        const rows = [];
+        if (isFav) {
+          rows.push({
+            label: '• Move to watchlist' + (watchFull ? ' (full)' : ' (' + state.watchlist.length + '/' + WATCHLIST_MAX + ')'),
+            disabled: watchFull,
+            action: function() { setFavorite(null); addWatchlist(code); }
+          });
+          rows.push({ label: '✕ Clear favorite', action: function() { setFavorite(null); } });
+        } else if (isWatch) {
+          rows.push({ label: '★ Promote to favorite', action: function() { setFavorite(code); } });
+          rows.push({ label: '• Remove from watchlist', action: function() { removeWatchlist(code); } });
+        } else {
+          rows.push({ label: '★ Set as favorite', action: function() { setFavorite(code); } });
+          rows.push({
+            label: '• Add to watchlist' + (watchFull ? ' (full)' : ' (' + state.watchlist.length + '/' + WATCHLIST_MAX + ')'),
+            disabled: watchFull,
+            action: function() { addWatchlist(code); }
+          });
+        }
+
+        const pop = document.createElement('div');
+        pop.id = 'myteams-popover';
+        pop.setAttribute('role', 'menu');
+        pop.setAttribute('aria-label', name);
+        rows.forEach(function(r, i) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('role', 'menuitem');
+          b.textContent = r.label;
+          if (r.disabled) b.disabled = true;
+          b.addEventListener('click', function() {
+            r.action();
+            closePopover();
+          });
+          pop.appendChild(b);
+        });
+        document.body.appendChild(pop);
+
+        // Position above the trigger; flip below if not enough room
+        const rect = triggerEl.getBoundingClientRect();
+        const popRect = pop.getBoundingClientRect();
+        const aboveTop = rect.top + window.scrollY - popRect.height - 6;
+        const flipBelow = aboveTop < window.scrollY + 8;
+        pop.style.top = (flipBelow ? rect.bottom + window.scrollY + 6 : aboveTop) + 'px';
+        let left = rect.left + window.scrollX + rect.width / 2 - popRect.width / 2;
+        const minLeft = 8;
+        const maxLeft = window.innerWidth + window.scrollX - popRect.width - 8;
+        if (left < minLeft) left = minLeft;
+        if (left > maxLeft) left = maxLeft;
+        pop.style.left = left + 'px';
+
+        const firstBtn = pop.querySelector('button:not(:disabled)');
+        if (firstBtn) firstBtn.focus();
+
+        // Defer attaching outside-click so the triggering click doesn't immediately close us
+        setTimeout(function() {
+          document.addEventListener('click', popoverOutsideClick, true);
+          document.addEventListener('keydown', popoverEsc, true);
+        }, 0);
+      }
+
+      // Delegate clicks on team-name buttons inside match cards
+      document.addEventListener('click', function(e) {
+        const trigger = e.target.closest('#matches-list .name.clickable');
+        if (!trigger) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const code = trigger.getAttribute('data-team-code');
+        const name = trigger.getAttribute('data-team-name') || trigger.textContent;
+        openPopover(trigger, code, name);
+      });
+
       window.MyTeams = {
         get: get,
         setFavorite: setFavorite,
@@ -2019,7 +2165,9 @@
         article.innerHTML =
           '<div class="team home">' +
             '<span class="flag">' + flagFor(home.code) + '</span>' +
-            '<span class="name">' + escapeHtml(home.name) + '</span>' +
+            (home.code === 'TBD'
+              ? '<span class="name">' + escapeHtml(home.name) + '</span>'
+              : '<button type="button" class="name clickable" data-team-code="' + home.code + '" data-team-name="' + escapeHtml(home.name) + '">' + escapeHtml(home.name) + '</button>') +
           '</div>' +
           '<div class="meta">' +
             (opts.label ? '<span class="label-tag">' + escapeHtml(opts.label) + '</span>' : '') +
@@ -2030,7 +2178,9 @@
             (status === 'final' ? '<span class="badge final">FT</span>' : '') +
           '</div>' +
           '<div class="team away">' +
-            '<span class="name">' + escapeHtml(away.name) + '</span>' +
+            (away.code === 'TBD'
+              ? '<span class="name">' + escapeHtml(away.name) + '</span>'
+              : '<button type="button" class="name clickable" data-team-code="' + away.code + '" data-team-name="' + escapeHtml(away.name) + '">' + escapeHtml(away.name) + '</button>') +
             '<span class="flag">' + flagFor(away.code) + '</span>' +
           '</div>';
         return article;
