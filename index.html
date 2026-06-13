@@ -1736,8 +1736,65 @@
       // Filled in Task 4. For now use a placeholder that will be replaced.
       const ROSTER = [
         { code: 'MX', name: 'Mexico', group: 'A' },
+        { code: 'ZA', name: 'South Africa', group: 'A' },
+        { code: 'CZ', name: 'Czech Republic', group: 'A' },
+        { code: 'KR', name: 'South Korea', group: 'A' },
+        { code: 'CA', name: 'Canada', group: 'B' },
+        { code: 'CH', name: 'Switzerland', group: 'B' },
+        { code: 'QA', name: 'Qatar', group: 'B' },
+        { code: 'BA', name: 'Bosnia and Herzegovina', group: 'B' },
+        { code: 'BR', name: 'Brazil', group: 'C' },
+        { code: 'MA', name: 'Morocco', group: 'C' },
+        { code: 'HT', name: 'Haiti', group: 'C' },
+        { code: 'GB-SCT', name: 'Scotland', group: 'C' },
         { code: 'US', name: 'United States', group: 'D' },
+        { code: 'AU', name: 'Australia', group: 'D' },
+        { code: 'TR', name: 'Turkey', group: 'D' },
+        { code: 'PY', name: 'Paraguay', group: 'D' },
+        { code: 'DE', name: 'Germany', group: 'E' },
+        { code: 'EC', name: 'Ecuador', group: 'E' },
+        { code: 'CI', name: 'Ivory Coast', group: 'E' },
+        { code: 'CW', name: 'Curaçao', group: 'E' },
+        { code: 'JP', name: 'Japan', group: 'F' },
+        { code: 'NL', name: 'Netherlands', group: 'F' },
+        { code: 'SE', name: 'Sweden', group: 'F' },
+        { code: 'TN', name: 'Tunisia', group: 'F' },
+        { code: 'BE', name: 'Belgium', group: 'G' },
+        { code: 'EG', name: 'Egypt', group: 'G' },
+        { code: 'IR', name: 'Iran', group: 'G' },
+        { code: 'NZ', name: 'New Zealand', group: 'G' },
+        { code: 'ES', name: 'Spain', group: 'H' },
+        { code: 'UY', name: 'Uruguay', group: 'H' },
+        { code: 'SA', name: 'Saudi Arabia', group: 'H' },
+        { code: 'CV', name: 'Cape Verde', group: 'H' },
+        { code: 'FR', name: 'France', group: 'I' },
+        { code: 'SN', name: 'Senegal', group: 'I' },
+        { code: 'NO', name: 'Norway', group: 'I' },
+        { code: 'IQ', name: 'Iraq', group: 'I' },
+        { code: 'AR', name: 'Argentina', group: 'J' },
+        { code: 'AT', name: 'Austria', group: 'J' },
+        { code: 'DZ', name: 'Algeria', group: 'J' },
+        { code: 'JO', name: 'Jordan', group: 'J' },
+        { code: 'PT', name: 'Portugal', group: 'K' },
+        { code: 'CO', name: 'Colombia', group: 'K' },
+        { code: 'UZ', name: 'Uzbekistan', group: 'K' },
+        { code: 'CD', name: 'DR Congo', group: 'K' },
+        { code: 'GB-ENG', name: 'England', group: 'L' },
+        { code: 'HR', name: 'Croatia', group: 'L' },
+        { code: 'GH', name: 'Ghana', group: 'L' },
+        { code: 'PA', name: 'Panama', group: 'L' },
       ];
+
+      function showToast(text) {
+        const toast = document.getElementById('myteams-toast');
+        if (!toast) return;
+        toast.textContent = text;
+        toast.classList.add('visible');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function() {
+          toast.classList.remove('visible');
+        }, 1200);
+      }
 
       function buildPicker() {
         const overlay = document.createElement('div');
@@ -1753,10 +1810,33 @@
             '<div id="myteams-toast" role="status" aria-live="polite"></div>' +
           '</div>';
         document.body.appendChild(overlay);
+
         overlay.addEventListener('click', function(e) {
           if (e.target === overlay) closePicker();
         });
         overlay.querySelector('#myteams-close').addEventListener('click', closePicker);
+
+        const grid = overlay.querySelector('#myteams-grid');
+        grid.addEventListener('click', function(e) {
+          const tile = e.target.closest('.tile');
+          if (!tile) return;
+          const code = tile.getAttribute('data-code');
+          const result = cycle(code);
+          if (result === 'promoted') {
+            showToast('Watchlist full — promoted to favorite');
+          }
+          // Re-render to reflect new state; cycle() already called notify() → renderButton()
+          renderTiles();
+          renderCounts();
+          // Restore focus to the same code's tile for keyboard users
+          const refocus = grid.querySelector('[data-code="' + code + '"]');
+          if (refocus) refocus.focus();
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && overlay.classList.contains('open')) closePicker();
+        });
+
         return overlay;
       }
 
