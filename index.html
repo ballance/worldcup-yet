@@ -759,6 +759,14 @@
       opacity: 0.4;
       cursor: not-allowed;
     }
+    .myteams-next {
+      font-size: clamp(11px, 1.6vw, 13px);
+      font-style: italic;
+      color: rgba(255, 215, 0, 0.85);
+      text-align: center;
+      padding: 4px 8px 10px;
+      margin: 0;
+    }
 
     .match .team {
       display: flex;
@@ -2215,13 +2223,53 @@
 
         header.textContent = formatHeader(now, userTz);
 
+        const myTeams = (window.MyTeams ? window.MyTeams.get() : { favorite: null, watchlist: [] });
+        const mySelected = myTeams.favorite
+          ? [myTeams.favorite].concat(myTeams.watchlist)
+          : myTeams.watchlist.slice();
+        const hasSelections = mySelected.length > 0;
+
+        function matchInvolvesMine(m) {
+          return mySelected.indexOf(m.home.code) >= 0 || mySelected.indexOf(m.away.code) >= 0;
+        }
+
+        function findMyNextMatch() {
+          if (!hasSelections) return null;
+          const sorted = cache.slice().sort(function(a, b) {
+            return new Date(a.kickoffUtc) - new Date(b.kickoffUtc);
+          });
+          for (let i = 0; i < sorted.length; i++) {
+            const m = sorted[i];
+            if (new Date(m.kickoffUtc) <= now) continue;
+            if (matchInvolvesMine(m)) return m;
+          }
+          return null;
+        }
+
+        function appendNextLine(m) {
+          if (!m) return;
+          const dateLabel = new Intl.DateTimeFormat(undefined, {
+            weekday: 'long', month: 'long', day: 'numeric',
+            timeZone: userTz || undefined
+          }).format(new Date(m.kickoffUtc));
+          const timeLabel = formatPrimaryTime(new Date(m.kickoffUtc), userTz);
+          const p = document.createElement('p');
+          p.className = 'myteams-next';
+          p.textContent = 'Your next match: ' + m.home.name + ' vs ' + m.away.name +
+            ' — ' + dateLabel + ' · ' + timeLabel + ' · ' + m.venue.city;
+          list.insertBefore(p, list.firstChild);
+        }
+
         if (todayMatches.length > 0) {
           if (isAllTbd(todayMatches)) {
             showBracketMessage(todayMatches[0].stage, message);
+            if (hasSelections) appendNextLine(findMyNextMatch());
           } else {
             todayMatches.forEach(function(m) {
               list.appendChild(renderCard(m, now));
             });
+            const anyMine = todayMatches.some(matchInvolvesMine);
+            if (hasSelections && !anyMine) appendNextLine(findMyNextMatch());
           }
           return;
         }
@@ -2229,13 +2277,17 @@
         // Rest day: walk forward to next non-empty bucket
         const keys = Object.keys(buckets).sort();
         const nextKey = keys.find(function(k) { return k > todayKey; });
-        if (!nextKey) return;
+        if (!nextKey) {
+          if (hasSelections) appendNextLine(findMyNextMatch());
+          return;
+        }
         const nextMatches = buckets[nextKey];
         if (isAllTbd(nextMatches)) {
           showBracketMessage(nextMatches[0].stage, message);
         } else {
           list.appendChild(renderCard(nextMatches[0], now, { muted: true, label: 'Next match' }));
         }
+        if (hasSelections) appendNextLine(findMyNextMatch());
       }
 
       function showSkeleton() {
