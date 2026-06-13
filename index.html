@@ -2425,16 +2425,11 @@
           const awayButton = away.code === 'TBD'
             ? '<span class="name">' + escapeHtml(away.name) + '</span>'
             : '<button type="button" class="name clickable" data-team-code="' + away.code + '" data-team-name="' + escapeHtml(away.name) + '">' + escapeHtml(away.name) + '</button>';
-          function estimateMinute(kickoffDate, nowDate) {
-            const elapsed = Math.floor((nowDate.getTime() - kickoffDate.getTime()) / 60000);
-            if (elapsed < 1) return "1'";
-            if (elapsed <= 45) return elapsed + "'";
-            if (elapsed <= 60) return "45'";
-            const adjusted = elapsed - 15;
-            return (adjusted >= 90 ? "90+" : adjusted) + "'";
-          }
-          const minuteOrEstimate = live.minute || (live.status === 'LIVE' ? estimateMinute(kickoff, now) : '');
-          const statusText = live.status === 'LIVE' ? (minuteOrEstimate ? 'LIVE ' + minuteOrEstimate : 'LIVE') : live.minute;
+          // Show upstream-provided minute when available; otherwise just "LIVE".
+          // Don't fabricate a minute from kickoff — wall-clock elapsed only has
+          // hour-level precision (no halftime / stoppage info), so any estimate
+          // would be misleading.
+          const statusText = live.status === 'LIVE' ? (live.minute ? 'LIVE ' + live.minute : 'LIVE') : live.minute;
           const showDot = live.status === 'LIVE' || live.status === 'ET';
           const eventText = live.lastEvent && live.lastEvent.type && live.lastEvent.type.indexOf('GOAL') >= 0
             ? 'Goal: ' + (live.lastEvent.player || 'Unknown') + ' ' + (live.lastEvent.minute || '')
