@@ -701,6 +701,15 @@
     .match-final { opacity: 0.7; }
     .match-muted { opacity: 0.85; }
 
+    .match-favorite {
+      border-color: #FFD700;
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.4), 0 4px 20px rgba(255, 215, 0, 0.15);
+    }
+    .match-watch {
+      border-color: rgba(255, 215, 0, 0.55);
+    }
+
     .match .team {
       display: flex;
       align-items: center;
@@ -1996,6 +2005,17 @@
         const home = match.home;
         const away = match.away;
 
+        if (window.MyTeams) {
+          const teams = window.MyTeams.get();
+          const codes = [home && home.code, away && away.code];
+          // Order matters: favorite wins over watchlist
+          if (teams.favorite && codes.indexOf(teams.favorite) >= 0) {
+            article.classList.add('match-favorite');
+          } else if (teams.watchlist.some(function(c) { return codes.indexOf(c) >= 0; })) {
+            article.classList.add('match-watch');
+          }
+        }
+
         article.innerHTML =
           '<div class="team home">' +
             '<span class="flag">' + flagFor(home.code) + '</span>' +
@@ -2111,12 +2131,23 @@
         renderInterval = setInterval(function() {
           if (cache) renderMatches();
         }, 60 * 1000);
+        if (window.MyTeams && typeof window.MyTeams.onChange === 'function') {
+          if (!start._unsubscribe) {
+            start._unsubscribe = window.MyTeams.onChange(function() {
+              if (cache) renderMatches();
+            });
+          }
+        }
       }
 
       function stop() {
         if (renderInterval) {
           clearInterval(renderInterval);
           renderInterval = null;
+        }
+        if (start._unsubscribe) {
+          start._unsubscribe();
+          start._unsubscribe = null;
         }
         const section = document.getElementById('matches');
         if (section) {
