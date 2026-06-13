@@ -2061,6 +2061,150 @@
       };
     })();
 
+    /* === Live Scores === */
+    (function() {
+      const DEFAULT_URL = 'live.json';
+      const POLL_MS = 30 * 1000;
+      const LIVE_WINDOW_MS = 2 * 60 * 60 * 1000;
+
+      let cache = new Map();
+      let pollInterval = null;
+      let visibilityHandler = null;
+      const subscribers = { change: new Set(), goal: new Set() };
+
+      function getUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const override = params.get('live');
+        return override || DEFAULT_URL;
+      }
+
+      function bustedUrl() {
+        const base = getUrl();
+        const bust = Math.floor(Date.now() / 20000);
+        const sep = base.indexOf('?') >= 0 ? '&' : '?';
+        return base + sep + 'v=' + bust;
+      }
+
+      function get(fifaId) {
+        return cache.get(String(fifaId)) || null;
+      }
+
+      function notify(kind, payload) {
+        subscribers[kind].forEach(function(fn) {
+          try { fn(payload); } catch (e) { console.error('LiveScores subscriber error:', e); }
+        });
+      }
+
+      function diffAndCache(newMatches) {
+        const newCache = new Map();
+        const goals = [];
+        Object.keys(newMatches).forEach(function(key) {
+          const entry = newMatches[key];
+          const prev = cache.get(key);
+          newCache.set(key, entry);
+          if (!prev) return; // first sighting — joined-mid-match
+          const newTotal = (entry.homeScore || 0) + (entry.awayScore || 0);
+          const prevTotal = (prev.homeScore || 0) + (prev.awayScore || 0);
+          if (newTotal > prevTotal) {
+            const homeUp = (entry.homeScore || 0) > (prev.homeScore || 0);
+            goals.push({
+              fifaId: parseInt(key, 10),
+              scoringTeam: homeUp ? 'home' : 'away',
+              entry: entry
+            });
+          }
+        });
+        cache = newCache;
+        return goals;
+      }
+
+      function fetchOnce() {
+        return fetch(bustedUrl(), { cache: 'no-store' })
+          .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          })
+          .then(function(data) {
+            if (!data || typeof data !== 'object' || !data.matches) {
+              throw new Error('bad shape');
+            }
+            const goals = diffAndCache(data.matches);
+            notify('change', data);
+            goals.forEach(function(g) { notify('goal', g); });
+          })
+          .catch(function(err) {
+            console.warn('LiveScores fetch failed:', err.message);
+          });
+      }
+
+      function anyMatchInLiveWindow(now) {
+        if (!window.MatchesPanel || !window.MatchesPanel._cache) return false;
+        const matches = window.MatchesPanel._cache;
+        if (!Array.isArray(matches)) return false;
+        for (let i = 0; i < matches.length; i++) {
+          const k = new Date(matches[i].kickoffUtc).getTime();
+          const nowMs = now.getTime();
+          if (nowMs >= k && nowMs < k + LIVE_WINDOW_MS) return true;
+        }
+        return false;
+      }
+
+      function start() {
+        if (pollInterval) return;
+        const now = new Date();
+        if (!anyMatchInLiveWindow(now)) return;
+        fetchOnce();
+        pollInterval = setInterval(function() {
+          if (!anyMatchInLiveWindow(new Date())) {
+            stop();
+            return;
+          }
+          fetchOnce();
+        }, POLL_MS);
+        visibilityHandler = function() {
+          if (document.visibilityState === 'hidden') {
+            if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+          } else if (document.visibilityState === 'visible' && !pollInterval) {
+            if (anyMatchInLiveWindow(new Date())) {
+              fetchOnce();
+              pollInterval = setInterval(function() {
+                if (!anyMatchInLiveWindow(new Date())) { stop(); return; }
+                fetchOnce();
+              }, POLL_MS);
+            }
+          }
+        };
+        document.addEventListener('visibilitychange', visibilityHandler);
+      }
+
+      function stop() {
+        if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+        if (visibilityHandler) {
+          document.removeEventListener('visibilitychange', visibilityHandler);
+          visibilityHandler = null;
+        }
+        cache = new Map();
+      }
+
+      function onChange(fn) {
+        subscribers.change.add(fn);
+        return function() { subscribers.change.delete(fn); };
+      }
+
+      function onGoal(fn) {
+        subscribers.goal.add(fn);
+        return function() { subscribers.goal.delete(fn); };
+      }
+
+      window.LiveScores = {
+        get: get,
+        onChange: onChange,
+        onGoal: onGoal,
+        start: start,
+        stop: stop,
+      };
+    })();
+
     /* === Daily Matches Panel === */
     (function() {
       const MATCHES_URL = 'matches.json?v=20260611';
@@ -2363,7 +2507,11 @@
         }
       }
 
-      window.MatchesPanel = { start: start, stop: stop };
+      window.MatchesPanel = {
+        start: start,
+        stop: stop,
+        get _cache() { return cache; },
+      };
     })();
 
     /* === Init === */
