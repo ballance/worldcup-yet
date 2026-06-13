@@ -51,7 +51,9 @@ function deriveMinute(upstreamMatch, status) {
   if (status === 'PEN') return 'PEN';
   if (status === 'LIVE') {
     const m = upstreamMatch.minute;
-    return m ? (typeof m === 'number' ? m + "'" : String(m)) : "1'";
+    // Free tier of football-data.org omits the in-match minute; leave blank
+    // rather than fabricate "1'" which would mislabel every match.
+    return m ? (typeof m === 'number' ? m + "'" : String(m)) : '';
   }
   return '';
 }

@@ -2419,7 +2419,7 @@
           const awayButton = away.code === 'TBD'
             ? '<span class="name">' + escapeHtml(away.name) + '</span>'
             : '<button type="button" class="name clickable" data-team-code="' + away.code + '" data-team-name="' + escapeHtml(away.name) + '">' + escapeHtml(away.name) + '</button>';
-          const statusText = live.status === 'LIVE' ? 'LIVE ' + live.minute : live.minute;
+          const statusText = live.status === 'LIVE' ? (live.minute ? 'LIVE ' + live.minute : 'LIVE') : live.minute;
           const showDot = live.status === 'LIVE' || live.status === 'ET';
           const eventText = live.lastEvent && live.lastEvent.type && live.lastEvent.type.indexOf('GOAL') >= 0
             ? 'Goal: ' + (live.lastEvent.player || 'Unknown') + ' ' + (live.lastEvent.minute || '')

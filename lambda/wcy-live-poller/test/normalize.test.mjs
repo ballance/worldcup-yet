@@ -129,3 +129,25 @@ test('updatedUtc is set from the passed timestamp', () => {
   const out = normalize({ matches: [] }, matchesJson, aliases, '2026-06-15T12:00:00Z');
   assert.equal(out.updatedUtc, '2026-06-15T12:00:00Z');
 });
+
+test('live match without upstream minute → blank minute (no fabricated "1\'")', () => {
+  const out = normalize(
+    {
+      matches: [
+        {
+          status: 'IN_PLAY',
+          homeTeam: { tla: 'MEX' },
+          awayTeam: { tla: 'RSA' },
+          utcDate: '2026-06-11T19:00:00Z',
+          // minute intentionally omitted (free tier)
+          score: { fullTime: { home: 0, away: 0 } },
+        },
+      ],
+    },
+    matchesJson,
+    aliases,
+    '2026-06-11T19:30:00Z',
+  );
+  assert.equal(out.matches['1'].status, 'LIVE');
+  assert.equal(out.matches['1'].minute, '');
+});
