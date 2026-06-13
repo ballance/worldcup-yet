@@ -2624,6 +2624,11 @@
         showSkeleton();
         loadMatches().then(function(matches) {
           if (matches) renderMatches();
+          // LiveScores needs MatchesPanel._cache populated to detect the live window,
+          // so it must start AFTER matches.json resolves.
+          if (matches && window.LiveScores && typeof window.LiveScores.start === 'function') {
+            window.LiveScores.start();
+          }
         });
         renderInterval = setInterval(function() {
           if (cache) renderMatches();
@@ -2641,7 +2646,6 @@
               if (cache) renderMatches();
             });
           }
-          window.LiveScores.start();
           if (typeof window.LiveScores.onGoal === 'function') {
             if (!start._unsubscribeGoal) {
               start._unsubscribeGoal = window.LiveScores.onGoal(celebrateGoal);
