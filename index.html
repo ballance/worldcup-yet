@@ -43,7 +43,7 @@
       position: relative;
       z-index: 1;
       font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
-      font-size: clamp(96px, 24vw, 240px);
+      font-size: clamp(56px, 18vw, 220px);
       font-weight: 400;
       letter-spacing: 0.02em;
       color: #fff;
@@ -682,6 +682,53 @@
       opacity: 0.9;
       text-align: center;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    #matches-header .day-nav-btn {
+      background: rgba(255, 215, 0, 0.10);
+      border: 1px solid rgba(255, 215, 0, 0.40);
+      color: #FFD700;
+      font-size: 14px;
+      line-height: 1;
+      padding: 4px 9px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #matches-header .day-nav-btn:hover:not(:disabled),
+    #matches-header .day-nav-btn:focus-visible {
+      background: rgba(255, 215, 0, 0.22);
+      border-color: rgba(255, 215, 0, 0.7);
+      outline: none;
+    }
+    #matches-header .day-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    #matches-header .day-label {
+      min-width: 0;
+    }
+    .back-to-today {
+      background: transparent;
+      border: 0;
+      color: rgba(255, 215, 0, 0.85);
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px 6px;
+      margin: 0 auto 6px;
+      display: block;
+      text-decoration: underline;
+    }
+    .back-to-today:hover,
+    .back-to-today:focus-visible {
+      color: #FFD700;
+      outline: none;
     }
 
     #matches-list {
@@ -2323,6 +2370,46 @@
       let cache = null;
       let renderInterval = null;
 
+      const TOURNAMENT_FIRST = '2026-06-11';
+      const TOURNAMENT_LAST  = '2026-07-19';
+
+      function shiftDayKey(yyyymmdd, delta) {
+        const parts = yyyymmdd.split('-').map(Number);
+        const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+        dt.setUTCDate(dt.getUTCDate() + delta);
+        return dt.toISOString().slice(0, 10);
+      }
+
+      function clampDayKey(k) {
+        if (k < TOURNAMENT_FIRST) return TOURNAMENT_FIRST;
+        if (k > TOURNAMENT_LAST)  return TOURNAMENT_LAST;
+        return k;
+      }
+
+      // Parse a YYYY-MM-DD key into a Date that, when formatted in the
+      // user's local timezone, renders that same calendar day.
+      function parseDayKey(k) {
+        return new Date(k + 'T12:00:00');
+      }
+
+      function viewDayKey() {
+        const params = new URLSearchParams(window.location.search);
+        const explicit = params.get('day');
+        if (explicit && /^\d{4}-\d{2}-\d{2}$/.test(explicit)) return clampDayKey(explicit);
+        return bucketKey(getNow(), getUserTz());
+      }
+
+      function setViewDayKey(k) {
+        const clamped = clampDayKey(k);
+        const params = new URLSearchParams(window.location.search);
+        const todayKey = bucketKey(getNow(), getUserTz());
+        if (clamped === todayKey) params.delete('day');
+        else params.set('day', clamped);
+        const qs = params.toString();
+        window.history.replaceState({}, '', window.location.pathname + (qs ? '?' + qs : ''));
+        renderMatches();
+      }
+
       function getNow() {
         const params = new URLSearchParams(window.location.search);
         const d = params.get('date');
@@ -2356,10 +2443,11 @@
         return new Intl.DateTimeFormat(undefined, opts).format(date) + ' local';
       }
 
-      function formatHeader(date, tz) {
+      function formatHeader(date, tz, isToday) {
         const opts = { weekday: 'long', month: 'long', day: 'numeric' };
         if (tz) opts.timeZone = tz;
-        return 'Today · ' + new Intl.DateTimeFormat(undefined, opts).format(date);
+        const dateStr = new Intl.DateTimeFormat(undefined, opts).format(date);
+        return isToday ? 'Today · ' + dateStr : dateStr;
       }
 
       function statusFor(kickoff, now) {
@@ -2517,9 +2605,43 @@
         const userTz = getUserTz();
         const buckets = bucketsByDay(cache, userTz);
         const todayKey = bucketKey(now, userTz);
-        const todayMatches = buckets[todayKey] || [];
+        const viewKey = viewDayKey();
+        const isToday = (viewKey === todayKey);
+        const viewDateObj = parseDayKey(viewKey);
+        const viewMatches = buckets[viewKey] || [];
 
-        header.textContent = formatHeader(now, userTz);
+        const canPrev = viewKey > TOURNAMENT_FIRST;
+        const canNext = viewKey < TOURNAMENT_LAST;
+        const dateLabel = formatHeader(viewDateObj, userTz, isToday);
+        header.innerHTML =
+          '<button type="button" class="day-nav-btn" data-day-action="prev"' +
+            (canPrev ? '' : ' disabled') + ' aria-label="Previous day">&#9664;</button>' +
+          '<span class="day-label">' + escapeHtml(dateLabel) + '</span>' +
+          '<button type="button" class="day-nav-btn" data-day-action="next"' +
+            (canNext ? '' : ' disabled') + ' aria-label="Next day">&#9654;</button>';
+
+        if (!header._dayNavWired) {
+          header.addEventListener('click', function(e) {
+            const btn = e.target.closest('[data-day-action]');
+            if (!btn || btn.disabled) return;
+            const action = btn.getAttribute('data-day-action');
+            const current = viewDayKey();
+            if (action === 'prev') setViewDayKey(shiftDayKey(current, -1));
+            else if (action === 'next') setViewDayKey(shiftDayKey(current, 1));
+          });
+          header._dayNavWired = true;
+        }
+
+        if (!isToday) {
+          const back = document.createElement('button');
+          back.type = 'button';
+          back.className = 'back-to-today';
+          back.textContent = '← Back to today';
+          back.addEventListener('click', function() {
+            setViewDayKey(bucketKey(getNow(), getUserTz()));
+          });
+          list.appendChild(back);
+        }
 
         const myTeams = (window.MyTeams ? window.MyTeams.get() : { favorite: null, watchlist: [] });
         const mySelected = myTeams.favorite
@@ -2558,23 +2680,30 @@
           list.insertBefore(p, list.firstChild);
         }
 
-        if (todayMatches.length > 0) {
-          if (isAllTbd(todayMatches)) {
-            showBracketMessage(todayMatches[0].stage, message);
-            if (hasSelections) appendNextLine(findMyNextMatch());
+        if (viewMatches.length > 0) {
+          if (isAllTbd(viewMatches)) {
+            showBracketMessage(viewMatches[0].stage, message);
+            if (isToday && hasSelections) appendNextLine(findMyNextMatch());
           } else {
-            todayMatches.forEach(function(m) {
+            viewMatches.forEach(function(m) {
               list.appendChild(renderCard(m, now));
             });
-            const anyMine = todayMatches.some(matchInvolvesMine);
-            if (hasSelections && !anyMine) appendNextLine(findMyNextMatch());
+            const anyMine = viewMatches.some(matchInvolvesMine);
+            if (isToday && hasSelections && !anyMine) appendNextLine(findMyNextMatch());
           }
           return;
         }
 
-        // Rest day: walk forward to next non-empty bucket
+        // Empty bucket for the viewed day.
+        if (!isToday) {
+          message.textContent = 'No matches on this day.';
+          message.style.display = 'block';
+          return;
+        }
+
+        // Today rest-day: walk forward to next non-empty bucket
         const keys = Object.keys(buckets).sort();
-        const nextKey = keys.find(function(k) { return k > todayKey; });
+        const nextKey = keys.find(function(k) { return k > viewKey; });
         if (!nextKey) {
           if (hasSelections) appendNextLine(findMyNextMatch());
           return;
