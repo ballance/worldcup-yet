@@ -715,6 +715,91 @@
       margin: 0 0 8px;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
+    #next-countdown {
+      font-size: 12px;
+      font-style: italic;
+      color: rgba(255, 215, 0, 0.9);
+      text-align: center;
+      margin: 0 0 10px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    #next-countdown[hidden] { display: none; }
+    .broadcast {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      opacity: 0.75;
+      margin-top: 2px;
+    }
+    #matches-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .subscribe-cal {
+      align-self: center;
+      background: rgba(255, 215, 0, 0.10);
+      border: 1px solid rgba(255, 215, 0, 0.42);
+      color: #FFD700;
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    }
+    .subscribe-cal:hover, .subscribe-cal:focus-visible {
+      background: rgba(255, 215, 0, 0.22);
+      border-color: rgba(255, 215, 0, 0.7);
+      outline: none;
+    }
+    .standings-block {
+      background: rgba(10, 17, 40, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    .standings-block summary {
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255, 215, 0, 0.85);
+      list-style: none;
+      padding: 2px 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .standings-block summary::-webkit-details-marker { display: none; }
+    .standings-block summary::before {
+      content: '▸ ';
+      display: inline-block;
+      transition: transform 0.18s ease;
+    }
+    .standings-block[open] summary::before { content: '▾ '; }
+    .standings-block table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.92);
+      margin-top: 6px;
+    }
+    .standings-block th, .standings-block td {
+      padding: 3px 4px;
+      text-align: right;
+    }
+    .standings-block th:first-child,
+    .standings-block td:first-child { text-align: left; }
+    .standings-block th {
+      font-weight: 600;
+      opacity: 0.7;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .standings-block td.team { display: flex; gap: 5px; align-items: center; }
+    .standings-block .pts { font-weight: 700; color: #FFD700; }
     #matches-header .day-nav-btn {
       background: rgba(255, 215, 0, 0.10);
       border: 1px solid rgba(255, 215, 0, 0.40);
@@ -1084,8 +1169,10 @@
   <div id="subtitle"></div>
   <section id="matches" aria-label="Today's matches">
     <header id="matches-header"></header>
+    <p id="next-countdown" hidden></p>
     <div id="matches-list"></div>
     <p id="matches-message"></p>
+    <div id="matches-footer"></div>
   </section>
   <div id="flags"><div id="flags-track"></div></div>
   <div id="chant-toast"></div>
@@ -2562,6 +2649,136 @@
         return first.stage;
       }
 
+      function findNextMatch(now) {
+        if (!cache) return null;
+        const sorted = cache.slice().sort(function(a, b) {
+          return new Date(a.kickoffUtc) - new Date(b.kickoffUtc);
+        });
+        for (let i = 0; i < sorted.length; i++) {
+          const m = sorted[i];
+          if (new Date(m.kickoffUtc) > now) return m;
+        }
+        return null;
+      }
+
+      function formatRelative(ms) {
+        if (ms < 0) return null;
+        const totalMins = Math.floor(ms / 60000);
+        if (totalMins < 1) return 'less than a minute';
+        const days = Math.floor(totalMins / (60 * 24));
+        const hours = Math.floor((totalMins % (60 * 24)) / 60);
+        const mins = totalMins % 60;
+        const parts = [];
+        if (days > 0) parts.push(days + 'd');
+        if (hours > 0) parts.push(hours + 'h');
+        if (days === 0 && mins > 0) parts.push(mins + 'm');
+        return parts.join(' ');
+      }
+
+      function updateNextCountdown() {
+        const el = document.getElementById('next-countdown');
+        if (!el) return;
+        const now = getNow();
+        const next = findNextMatch(now);
+        if (!next) { el.hidden = true; return; }
+        const ms = new Date(next.kickoffUtc) - now;
+        const rel = formatRelative(ms);
+        if (!rel) { el.hidden = true; return; }
+        el.hidden = false;
+        el.textContent = 'Next: ' + next.home.name + ' vs ' + next.away.name +
+          ' in ' + rel;
+      }
+
+      function broadcastLine(match) {
+        // FOX (English) and Telemundo (Spanish) carry every WC 2026 match in the
+        // US. Specific channel within each family varies, but the network family
+        // doesn't — so a single line is honest.
+        if (!match || match.home.code === 'TBD') return '';
+        return '<span class="broadcast">📺 FOX · Telemundo</span>';
+      }
+
+      function computeStandings(groupLetter) {
+        if (!cache) return [];
+        const stageName = 'Group ' + groupLetter;
+        const live = window.LiveScores;
+        const tally = {};
+        function ensure(code, name) {
+          if (!tally[code]) tally[code] = { code: code, name: name, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0 };
+          return tally[code];
+        }
+        cache.forEach(function(m) {
+          if (m.stage !== stageName) return;
+          if (m.home.code === 'TBD' || m.away.code === 'TBD') return;
+          const entry = live ? live.get(m.id) : null;
+          if (!entry || (entry.status !== 'FT' && entry.status !== 'PEN' && entry.status !== 'AET')) return;
+          const h = ensure(m.home.code, m.home.name);
+          const a = ensure(m.away.code, m.away.name);
+          h.p++; a.p++;
+          h.gf += entry.homeScore; h.ga += entry.awayScore;
+          a.gf += entry.awayScore; a.ga += entry.homeScore;
+          if (entry.homeScore > entry.awayScore) { h.w++; h.pts += 3; a.l++; }
+          else if (entry.homeScore < entry.awayScore) { a.w++; a.pts += 3; h.l++; }
+          else { h.d++; a.d++; h.pts++; a.pts++; }
+        });
+        const rows = Object.keys(tally).map(function(k) { return tally[k]; });
+        rows.forEach(function(r) { r.gd = r.gf - r.ga; });
+        rows.sort(function(a, b) {
+          if (b.pts !== a.pts) return b.pts - a.pts;
+          if (b.gd !== a.gd) return b.gd - a.gd;
+          return b.gf - a.gf;
+        });
+        return rows;
+      }
+
+      function renderStandingsForGroupsToday(viewMatches) {
+        const footer = document.getElementById('matches-footer');
+        if (!footer) return;
+        // Clear standings only, keep subscribe button untouched
+        footer.querySelectorAll('.standings-block').forEach(function(n) { n.remove(); });
+        if (!viewMatches.length) return;
+        const groups = {};
+        viewMatches.forEach(function(m) {
+          if (m.stage && m.stage.indexOf('Group ') === 0) groups[m.stage.slice(6)] = true;
+        });
+        Object.keys(groups).sort().forEach(function(letter) {
+          const rows = computeStandings(letter);
+          if (rows.length === 0) return; // nothing played yet, skip
+          const wrap = document.createElement('details');
+          wrap.className = 'standings-block';
+          let html = '<summary>Group ' + letter + ' Standings</summary>' +
+            '<table>' +
+              '<thead><tr>' +
+                '<th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th>' +
+              '</tr></thead><tbody>';
+          rows.forEach(function(r) {
+            html += '<tr>' +
+              '<td class="team">' + flagFor(r.code) + ' ' + escapeHtml(r.name) + '</td>' +
+              '<td>' + r.p + '</td>' +
+              '<td>' + r.w + '</td>' +
+              '<td>' + r.d + '</td>' +
+              '<td>' + r.l + '</td>' +
+              '<td>' + (r.gd > 0 ? '+' + r.gd : r.gd) + '</td>' +
+              '<td class="pts">' + r.pts + '</td>' +
+            '</tr>';
+          });
+          html += '</tbody></table>';
+          wrap.innerHTML = html;
+          footer.appendChild(wrap);
+        });
+      }
+
+      function renderSubscribeButton() {
+        const footer = document.getElementById('matches-footer');
+        if (!footer || footer.querySelector('.subscribe-cal')) return;
+        const a = document.createElement('a');
+        a.className = 'subscribe-cal';
+        // webcal:// prompts native calendar apps to subscribe + auto-update.
+        a.href = 'webcal://worldcupyet.com/schedule.ics';
+        a.textContent = '📅 Subscribe in calendar';
+        a.setAttribute('aria-label', 'Subscribe to the FIFA World Cup 2026 schedule in your calendar');
+        footer.appendChild(a);
+      }
+
       function renderCard(match, now, opts) {
         opts = opts || {};
         const kickoff = new Date(match.kickoffUtc);
@@ -2640,6 +2857,7 @@
             '<span class="time-primary">' + escapeHtml(formatPrimaryTime(kickoff, userTz)) + '</span>' +
             '<span class="time-venue">' + escapeHtml(formatVenueTime(kickoff, match.venue.tz)) + '</span>' +
             '<span class="venue">' + escapeHtml(match.venue.city + ' · ' + match.stage) + '</span>' +
+            broadcastLine(match) +
             (status === 'live' ? '<span class="badge live" aria-live="polite"><span class="dot"></span>LIVE</span>' : '') +
             (status === 'final' ? '<span class="badge final">FT</span>' : '') +
           '</div>' +
@@ -2751,6 +2969,10 @@
             ' — ' + dateLabel + ' · ' + timeLabel + ' · ' + m.venue.city;
           list.insertBefore(p, list.firstChild);
         }
+
+        updateNextCountdown();
+        renderSubscribeButton();
+        renderStandingsForGroupsToday(viewMatches);
 
         if (viewMatches.length > 0) {
           if (isAllTbd(viewMatches)) {

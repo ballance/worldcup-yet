@@ -1,0 +1,1050 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//worldcupyet.com//Schedule//EN
+X-WR-CALNAME:FIFA World Cup 2026
+X-WR-CALDESC:Full schedule of FIFA World Cup 2026 matches
+X-WR-TIMEZONE:UTC
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+BEGIN:VEVENT
+UID:wcy-1@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260611T190000Z
+DTEND:20260611T210000Z
+SUMMARY:⚽ Mexico vs South Africa
+LOCATION:Estadio Azteca\, Mexico City
+DESCRIPTION:FIFA World Cup 2026 · Group A · Match #1
+URL:https://worldcupyet.com/?day=2026-06-11
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-2@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260612T020000Z
+DTEND:20260612T040000Z
+SUMMARY:⚽ South Korea vs Czech Republic
+LOCATION:Estadio Akron\, Zapopan
+DESCRIPTION:FIFA World Cup 2026 · Group A · Match #2
+URL:https://worldcupyet.com/?day=2026-06-12
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-3@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260612T190000Z
+DTEND:20260612T210000Z
+SUMMARY:⚽ Canada vs Bosnia and Herzegovina
+LOCATION:BMO Field\, Toronto
+DESCRIPTION:FIFA World Cup 2026 · Group B · Match #3
+URL:https://worldcupyet.com/?day=2026-06-12
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-4@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260613T010000Z
+DTEND:20260613T030000Z
+SUMMARY:⚽ United States vs Paraguay
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Group D · Match #4
+URL:https://worldcupyet.com/?day=2026-06-13
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-5@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260614T010000Z
+DTEND:20260614T030000Z
+SUMMARY:⚽ Haiti vs Scotland
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Group C · Match #5
+URL:https://worldcupyet.com/?day=2026-06-14
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-6@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260614T040000Z
+DTEND:20260614T060000Z
+SUMMARY:⚽ Australia vs Turkey
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Group D · Match #6
+URL:https://worldcupyet.com/?day=2026-06-14
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-7@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260613T220000Z
+DTEND:20260614T000000Z
+SUMMARY:⚽ Brazil vs Morocco
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Group C · Match #7
+URL:https://worldcupyet.com/?day=2026-06-13
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-8@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260613T190000Z
+DTEND:20260613T210000Z
+SUMMARY:⚽ Qatar vs Switzerland
+LOCATION:Levi's Stadium\, Santa Clara
+DESCRIPTION:FIFA World Cup 2026 · Group B · Match #8
+URL:https://worldcupyet.com/?day=2026-06-13
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-9@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260614T230000Z
+DTEND:20260615T010000Z
+SUMMARY:⚽ Ivory Coast vs Ecuador
+LOCATION:Lincoln Financial Field\, Philadelphia
+DESCRIPTION:FIFA World Cup 2026 · Group E · Match #9
+URL:https://worldcupyet.com/?day=2026-06-14
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-10@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260614T170000Z
+DTEND:20260614T190000Z
+SUMMARY:⚽ Germany vs Curaçao
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Group E · Match #10
+URL:https://worldcupyet.com/?day=2026-06-14
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-11@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260614T200000Z
+DTEND:20260614T220000Z
+SUMMARY:⚽ Netherlands vs Japan
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Group F · Match #11
+URL:https://worldcupyet.com/?day=2026-06-14
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-12@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260615T020000Z
+DTEND:20260615T040000Z
+SUMMARY:⚽ Sweden vs Tunisia
+LOCATION:Estadio BBVA\, Guadalupe
+DESCRIPTION:FIFA World Cup 2026 · Group F · Match #12
+URL:https://worldcupyet.com/?day=2026-06-15
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-13@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260615T220000Z
+DTEND:20260616T000000Z
+SUMMARY:⚽ Saudi Arabia vs Uruguay
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Group H · Match #13
+URL:https://worldcupyet.com/?day=2026-06-15
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-14@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260615T160000Z
+DTEND:20260615T180000Z
+SUMMARY:⚽ Spain vs Cape Verde
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Group H · Match #14
+URL:https://worldcupyet.com/?day=2026-06-15
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-15@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260616T010000Z
+DTEND:20260616T030000Z
+SUMMARY:⚽ Iran vs New Zealand
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Group G · Match #15
+URL:https://worldcupyet.com/?day=2026-06-16
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-16@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260615T190000Z
+DTEND:20260615T210000Z
+SUMMARY:⚽ Belgium vs Egypt
+LOCATION:Lumen Field\, Seattle
+DESCRIPTION:FIFA World Cup 2026 · Group G · Match #16
+URL:https://worldcupyet.com/?day=2026-06-15
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-17@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260616T190000Z
+DTEND:20260616T210000Z
+SUMMARY:⚽ France vs Senegal
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Group I · Match #17
+URL:https://worldcupyet.com/?day=2026-06-16
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-18@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260616T220000Z
+DTEND:20260617T000000Z
+SUMMARY:⚽ Iraq vs Norway
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Group I · Match #18
+URL:https://worldcupyet.com/?day=2026-06-16
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-19@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260617T010000Z
+DTEND:20260617T030000Z
+SUMMARY:⚽ Argentina vs Algeria
+LOCATION:Arrowhead Stadium\, Kansas City
+DESCRIPTION:FIFA World Cup 2026 · Group J · Match #19
+URL:https://worldcupyet.com/?day=2026-06-17
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-20@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260617T040000Z
+DTEND:20260617T060000Z
+SUMMARY:⚽ Austria vs Jordan
+LOCATION:Levi's Stadium\, Santa Clara
+DESCRIPTION:FIFA World Cup 2026 · Group J · Match #20
+URL:https://worldcupyet.com/?day=2026-06-17
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-21@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260617T230000Z
+DTEND:20260618T010000Z
+SUMMARY:⚽ Ghana vs Panama
+LOCATION:BMO Field\, Toronto
+DESCRIPTION:FIFA World Cup 2026 · Group L · Match #21
+URL:https://worldcupyet.com/?day=2026-06-17
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-22@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260617T200000Z
+DTEND:20260617T220000Z
+SUMMARY:⚽ England vs Croatia
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Group L · Match #22
+URL:https://worldcupyet.com/?day=2026-06-17
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-23@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260617T170000Z
+DTEND:20260617T190000Z
+SUMMARY:⚽ Portugal vs DR Congo
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Group K · Match #23
+URL:https://worldcupyet.com/?day=2026-06-17
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-24@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260618T020000Z
+DTEND:20260618T040000Z
+SUMMARY:⚽ Uzbekistan vs Colombia
+LOCATION:Estadio Azteca\, Mexico City
+DESCRIPTION:FIFA World Cup 2026 · Group K · Match #24
+URL:https://worldcupyet.com/?day=2026-06-18
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-25@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260618T160000Z
+DTEND:20260618T180000Z
+SUMMARY:⚽ Czech Republic vs South Africa
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Group A · Match #25
+URL:https://worldcupyet.com/?day=2026-06-18
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-26@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260618T190000Z
+DTEND:20260618T210000Z
+SUMMARY:⚽ Switzerland vs Bosnia and Herzegovina
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Group B · Match #26
+URL:https://worldcupyet.com/?day=2026-06-18
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-27@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260618T220000Z
+DTEND:20260619T000000Z
+SUMMARY:⚽ Canada vs Qatar
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Group B · Match #27
+URL:https://worldcupyet.com/?day=2026-06-18
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-28@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260619T010000Z
+DTEND:20260619T030000Z
+SUMMARY:⚽ Mexico vs South Korea
+LOCATION:Estadio Akron\, Zapopan
+DESCRIPTION:FIFA World Cup 2026 · Group A · Match #28
+URL:https://worldcupyet.com/?day=2026-06-19
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-29@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260620T003000Z
+DTEND:20260620T023000Z
+SUMMARY:⚽ Brazil vs Haiti
+LOCATION:Lincoln Financial Field\, Philadelphia
+DESCRIPTION:FIFA World Cup 2026 · Group C · Match #29
+URL:https://worldcupyet.com/?day=2026-06-20
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-30@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260619T220000Z
+DTEND:20260620T000000Z
+SUMMARY:⚽ Scotland vs Morocco
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Group C · Match #30
+URL:https://worldcupyet.com/?day=2026-06-19
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-31@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260620T030000Z
+DTEND:20260620T050000Z
+SUMMARY:⚽ Turkey vs Paraguay
+LOCATION:Levi's Stadium\, Santa Clara
+DESCRIPTION:FIFA World Cup 2026 · Group D · Match #31
+URL:https://worldcupyet.com/?day=2026-06-20
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-32@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260619T190000Z
+DTEND:20260619T210000Z
+SUMMARY:⚽ United States vs Australia
+LOCATION:Lumen Field\, Seattle
+DESCRIPTION:FIFA World Cup 2026 · Group D · Match #32
+URL:https://worldcupyet.com/?day=2026-06-19
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-33@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260620T200000Z
+DTEND:20260620T220000Z
+SUMMARY:⚽ Germany vs Ivory Coast
+LOCATION:BMO Field\, Toronto
+DESCRIPTION:FIFA World Cup 2026 · Group E · Match #33
+URL:https://worldcupyet.com/?day=2026-06-20
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-34@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260621T000000Z
+DTEND:20260621T020000Z
+SUMMARY:⚽ Ecuador vs Curaçao
+LOCATION:Arrowhead Stadium\, Kansas City
+DESCRIPTION:FIFA World Cup 2026 · Group E · Match #34
+URL:https://worldcupyet.com/?day=2026-06-21
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-35@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260620T170000Z
+DTEND:20260620T190000Z
+SUMMARY:⚽ Netherlands vs Sweden
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Group F · Match #35
+URL:https://worldcupyet.com/?day=2026-06-20
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-36@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260621T040000Z
+DTEND:20260621T060000Z
+SUMMARY:⚽ Tunisia vs Japan
+LOCATION:Estadio BBVA\, Guadalupe
+DESCRIPTION:FIFA World Cup 2026 · Group F · Match #36
+URL:https://worldcupyet.com/?day=2026-06-21
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-37@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260621T220000Z
+DTEND:20260622T000000Z
+SUMMARY:⚽ Uruguay vs Cape Verde
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Group H · Match #37
+URL:https://worldcupyet.com/?day=2026-06-21
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-38@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260621T160000Z
+DTEND:20260621T180000Z
+SUMMARY:⚽ Spain vs Saudi Arabia
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Group H · Match #38
+URL:https://worldcupyet.com/?day=2026-06-21
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-39@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260621T190000Z
+DTEND:20260621T210000Z
+SUMMARY:⚽ Belgium vs Iran
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Group G · Match #39
+URL:https://worldcupyet.com/?day=2026-06-21
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-40@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260622T010000Z
+DTEND:20260622T030000Z
+SUMMARY:⚽ New Zealand vs Egypt
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Group G · Match #40
+URL:https://worldcupyet.com/?day=2026-06-22
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-41@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260623T000000Z
+DTEND:20260623T020000Z
+SUMMARY:⚽ Norway vs Senegal
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Group I · Match #41
+URL:https://worldcupyet.com/?day=2026-06-23
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-42@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260622T210000Z
+DTEND:20260622T230000Z
+SUMMARY:⚽ France vs Iraq
+LOCATION:Lincoln Financial Field\, Philadelphia
+DESCRIPTION:FIFA World Cup 2026 · Group I · Match #42
+URL:https://worldcupyet.com/?day=2026-06-22
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-43@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260622T170000Z
+DTEND:20260622T190000Z
+SUMMARY:⚽ Argentina vs Austria
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Group J · Match #43
+URL:https://worldcupyet.com/?day=2026-06-22
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-44@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260623T030000Z
+DTEND:20260623T050000Z
+SUMMARY:⚽ Jordan vs Algeria
+LOCATION:Levi's Stadium\, Santa Clara
+DESCRIPTION:FIFA World Cup 2026 · Group J · Match #44
+URL:https://worldcupyet.com/?day=2026-06-23
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-45@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260623T200000Z
+DTEND:20260623T220000Z
+SUMMARY:⚽ England vs Ghana
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Group L · Match #45
+URL:https://worldcupyet.com/?day=2026-06-23
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-46@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260623T230000Z
+DTEND:20260624T010000Z
+SUMMARY:⚽ Panama vs Croatia
+LOCATION:BMO Field\, Toronto
+DESCRIPTION:FIFA World Cup 2026 · Group L · Match #46
+URL:https://worldcupyet.com/?day=2026-06-23
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-47@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260623T170000Z
+DTEND:20260623T190000Z
+SUMMARY:⚽ Portugal vs Uzbekistan
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Group K · Match #47
+URL:https://worldcupyet.com/?day=2026-06-23
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-48@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260624T020000Z
+DTEND:20260624T040000Z
+SUMMARY:⚽ Colombia vs DR Congo
+LOCATION:Estadio Akron\, Zapopan
+DESCRIPTION:FIFA World Cup 2026 · Group K · Match #48
+URL:https://worldcupyet.com/?day=2026-06-24
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-49@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260624T220000Z
+DTEND:20260625T000000Z
+SUMMARY:⚽ Scotland vs Brazil
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Group C · Match #49
+URL:https://worldcupyet.com/?day=2026-06-24
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-50@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260624T220000Z
+DTEND:20260625T000000Z
+SUMMARY:⚽ Morocco vs Haiti
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Group C · Match #50
+URL:https://worldcupyet.com/?day=2026-06-24
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-51@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260624T190000Z
+DTEND:20260624T210000Z
+SUMMARY:⚽ Switzerland vs Canada
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Group B · Match #51
+URL:https://worldcupyet.com/?day=2026-06-24
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-52@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260624T190000Z
+DTEND:20260624T210000Z
+SUMMARY:⚽ Bosnia and Herzegovina vs Qatar
+LOCATION:Lumen Field\, Seattle
+DESCRIPTION:FIFA World Cup 2026 · Group B · Match #52
+URL:https://worldcupyet.com/?day=2026-06-24
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-53@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260625T010000Z
+DTEND:20260625T030000Z
+SUMMARY:⚽ Czech Republic vs Mexico
+LOCATION:Estadio Azteca\, Mexico City
+DESCRIPTION:FIFA World Cup 2026 · Group A · Match #53
+URL:https://worldcupyet.com/?day=2026-06-25
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-54@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260625T010000Z
+DTEND:20260625T030000Z
+SUMMARY:⚽ South Africa vs South Korea
+LOCATION:Estadio BBVA\, Guadalupe
+DESCRIPTION:FIFA World Cup 2026 · Group A · Match #54
+URL:https://worldcupyet.com/?day=2026-06-25
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-55@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260625T200000Z
+DTEND:20260625T220000Z
+SUMMARY:⚽ Curaçao vs Ivory Coast
+LOCATION:Lincoln Financial Field\, Philadelphia
+DESCRIPTION:FIFA World Cup 2026 · Group E · Match #55
+URL:https://worldcupyet.com/?day=2026-06-25
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-56@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260625T200000Z
+DTEND:20260625T220000Z
+SUMMARY:⚽ Ecuador vs Germany
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Group E · Match #56
+URL:https://worldcupyet.com/?day=2026-06-25
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-57@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260625T230000Z
+DTEND:20260626T010000Z
+SUMMARY:⚽ Japan vs Sweden
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Group F · Match #57
+URL:https://worldcupyet.com/?day=2026-06-25
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-58@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260625T230000Z
+DTEND:20260626T010000Z
+SUMMARY:⚽ Tunisia vs Netherlands
+LOCATION:Arrowhead Stadium\, Kansas City
+DESCRIPTION:FIFA World Cup 2026 · Group F · Match #58
+URL:https://worldcupyet.com/?day=2026-06-25
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-59@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260626T020000Z
+DTEND:20260626T040000Z
+SUMMARY:⚽ Turkey vs United States
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Group D · Match #59
+URL:https://worldcupyet.com/?day=2026-06-26
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-60@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260626T020000Z
+DTEND:20260626T040000Z
+SUMMARY:⚽ Paraguay vs Australia
+LOCATION:Levi's Stadium\, Santa Clara
+DESCRIPTION:FIFA World Cup 2026 · Group D · Match #60
+URL:https://worldcupyet.com/?day=2026-06-26
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-61@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260626T190000Z
+DTEND:20260626T210000Z
+SUMMARY:⚽ Norway vs France
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Group I · Match #61
+URL:https://worldcupyet.com/?day=2026-06-26
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-62@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260626T190000Z
+DTEND:20260626T210000Z
+SUMMARY:⚽ Senegal vs Iraq
+LOCATION:BMO Field\, Toronto
+DESCRIPTION:FIFA World Cup 2026 · Group I · Match #62
+URL:https://worldcupyet.com/?day=2026-06-26
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-63@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T030000Z
+DTEND:20260627T050000Z
+SUMMARY:⚽ Egypt vs Iran
+LOCATION:Lumen Field\, Seattle
+DESCRIPTION:FIFA World Cup 2026 · Group G · Match #63
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-64@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T030000Z
+DTEND:20260627T050000Z
+SUMMARY:⚽ New Zealand vs Belgium
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Group G · Match #64
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-65@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T000000Z
+DTEND:20260627T020000Z
+SUMMARY:⚽ Cape Verde vs Saudi Arabia
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Group H · Match #65
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-66@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T000000Z
+DTEND:20260627T020000Z
+SUMMARY:⚽ Uruguay vs Spain
+LOCATION:Estadio Akron\, Zapopan
+DESCRIPTION:FIFA World Cup 2026 · Group H · Match #66
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-67@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T210000Z
+DTEND:20260627T230000Z
+SUMMARY:⚽ Panama vs England
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Group L · Match #67
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-68@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T210000Z
+DTEND:20260627T230000Z
+SUMMARY:⚽ Croatia vs Ghana
+LOCATION:Lincoln Financial Field\, Philadelphia
+DESCRIPTION:FIFA World Cup 2026 · Group L · Match #68
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-69@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260628T020000Z
+DTEND:20260628T040000Z
+SUMMARY:⚽ Algeria vs Austria
+LOCATION:Arrowhead Stadium\, Kansas City
+DESCRIPTION:FIFA World Cup 2026 · Group J · Match #69
+URL:https://worldcupyet.com/?day=2026-06-28
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-70@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260628T020000Z
+DTEND:20260628T040000Z
+SUMMARY:⚽ Jordan vs Argentina
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Group J · Match #70
+URL:https://worldcupyet.com/?day=2026-06-28
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-71@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T233000Z
+DTEND:20260628T013000Z
+SUMMARY:⚽ Colombia vs Portugal
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Group K · Match #71
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-72@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260627T233000Z
+DTEND:20260628T013000Z
+SUMMARY:⚽ DR Congo vs Uzbekistan
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Group K · Match #72
+URL:https://worldcupyet.com/?day=2026-06-27
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-73@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260628T190000Z
+DTEND:20260628T210000Z
+SUMMARY:⚽ Runner-up Group A vs Runner-up Group B
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #73
+URL:https://worldcupyet.com/?day=2026-06-28
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-74@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260629T203000Z
+DTEND:20260629T223000Z
+SUMMARY:⚽ Winner Group E vs 3rd Place Group A/B/C/D/F
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #74
+URL:https://worldcupyet.com/?day=2026-06-29
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-75@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260630T010000Z
+DTEND:20260630T030000Z
+SUMMARY:⚽ Winner Group F vs Runner-up Group C
+LOCATION:Estadio BBVA\, Guadalupe
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #75
+URL:https://worldcupyet.com/?day=2026-06-30
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-76@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260629T170000Z
+DTEND:20260629T190000Z
+SUMMARY:⚽ Winner Group C vs Runner-up Group F
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #76
+URL:https://worldcupyet.com/?day=2026-06-29
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-77@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260630T210000Z
+DTEND:20260630T230000Z
+SUMMARY:⚽ Winner Group I vs 3rd Place Group C/D/F/G/H
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #77
+URL:https://worldcupyet.com/?day=2026-06-30
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-78@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260630T170000Z
+DTEND:20260630T190000Z
+SUMMARY:⚽ Runner-up Group E vs Runner-up Group I
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #78
+URL:https://worldcupyet.com/?day=2026-06-30
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-79@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260701T010000Z
+DTEND:20260701T030000Z
+SUMMARY:⚽ Winner Group A vs 3rd Place Group C/E/F/H/I
+LOCATION:Estadio Azteca\, Mexico City
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #79
+URL:https://worldcupyet.com/?day=2026-07-01
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-80@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260701T160000Z
+DTEND:20260701T180000Z
+SUMMARY:⚽ Winner Group L vs 3rd Place Group E/H/I/J/K
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #80
+URL:https://worldcupyet.com/?day=2026-07-01
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-81@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260702T000000Z
+DTEND:20260702T020000Z
+SUMMARY:⚽ Winner Group D vs 3rd Place Group B/E/F/I/J
+LOCATION:Levi's Stadium\, Santa Clara
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #81
+URL:https://worldcupyet.com/?day=2026-07-02
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-82@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260701T200000Z
+DTEND:20260701T220000Z
+SUMMARY:⚽ Winner Group G vs 3rd Place Group A/E/H/I/J
+LOCATION:Lumen Field\, Seattle
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #82
+URL:https://worldcupyet.com/?day=2026-07-01
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-83@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260702T230000Z
+DTEND:20260703T010000Z
+SUMMARY:⚽ Runner-up Group K vs Runner-up Group L
+LOCATION:BMO Field\, Toronto
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #83
+URL:https://worldcupyet.com/?day=2026-07-02
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-84@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260702T190000Z
+DTEND:20260702T210000Z
+SUMMARY:⚽ Winner Group H vs Runner-up Group J
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #84
+URL:https://worldcupyet.com/?day=2026-07-02
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-85@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260703T030000Z
+DTEND:20260703T050000Z
+SUMMARY:⚽ Winner Group B vs 3rd Place Group E/F/G/I/J
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #85
+URL:https://worldcupyet.com/?day=2026-07-03
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-86@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260703T220000Z
+DTEND:20260704T000000Z
+SUMMARY:⚽ Winner Group J vs Runner-up Group H
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #86
+URL:https://worldcupyet.com/?day=2026-07-03
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-87@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260704T013000Z
+DTEND:20260704T033000Z
+SUMMARY:⚽ Winner Group K vs 3rd Place Group D/E/I/J/L
+LOCATION:Arrowhead Stadium\, Kansas City
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #87
+URL:https://worldcupyet.com/?day=2026-07-04
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-88@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260703T180000Z
+DTEND:20260703T200000Z
+SUMMARY:⚽ Runner-up Group D vs Runner-up Group G
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Round of 32 · Match #88
+URL:https://worldcupyet.com/?day=2026-07-03
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-89@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260704T210000Z
+DTEND:20260704T230000Z
+SUMMARY:⚽ Winner Match 74 vs Winner Match 77
+LOCATION:Lincoln Financial Field\, Philadelphia
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #89
+URL:https://worldcupyet.com/?day=2026-07-04
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-90@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260704T170000Z
+DTEND:20260704T190000Z
+SUMMARY:⚽ Winner Match 73 vs Winner Match 75
+LOCATION:NRG Stadium\, Houston
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #90
+URL:https://worldcupyet.com/?day=2026-07-04
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-91@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260705T200000Z
+DTEND:20260705T220000Z
+SUMMARY:⚽ Winner Match 76 vs Winner Match 78
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #91
+URL:https://worldcupyet.com/?day=2026-07-05
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-92@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260706T000000Z
+DTEND:20260706T020000Z
+SUMMARY:⚽ Winner Match 79 vs Winner Match 80
+LOCATION:Estadio Azteca\, Mexico City
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #92
+URL:https://worldcupyet.com/?day=2026-07-06
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-93@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260706T190000Z
+DTEND:20260706T210000Z
+SUMMARY:⚽ Winner Match 83 vs Winner Match 84
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #93
+URL:https://worldcupyet.com/?day=2026-07-06
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-94@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260707T000000Z
+DTEND:20260707T020000Z
+SUMMARY:⚽ Winner Match 81 vs Winner Match 82
+LOCATION:Lumen Field\, Seattle
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #94
+URL:https://worldcupyet.com/?day=2026-07-07
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-95@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260707T160000Z
+DTEND:20260707T180000Z
+SUMMARY:⚽ Winner Match 86 vs Winner Match 88
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #95
+URL:https://worldcupyet.com/?day=2026-07-07
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-96@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260707T200000Z
+DTEND:20260707T220000Z
+SUMMARY:⚽ Winner Match 85 vs Winner Match 87
+LOCATION:BC Place\, Vancouver
+DESCRIPTION:FIFA World Cup 2026 · Round of 16 · Match #96
+URL:https://worldcupyet.com/?day=2026-07-07
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-97@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260709T200000Z
+DTEND:20260709T220000Z
+SUMMARY:⚽ Winner Match 89 vs Winner Match 90
+LOCATION:Gillette Stadium\, Foxborough
+DESCRIPTION:FIFA World Cup 2026 · Quarter-finals · Match #97
+URL:https://worldcupyet.com/?day=2026-07-09
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-98@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260710T190000Z
+DTEND:20260710T210000Z
+SUMMARY:⚽ Winner Match 93 vs Winner Match 94
+LOCATION:SoFi Stadium\, Inglewood
+DESCRIPTION:FIFA World Cup 2026 · Quarter-finals · Match #98
+URL:https://worldcupyet.com/?day=2026-07-10
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-99@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260711T210000Z
+DTEND:20260711T230000Z
+SUMMARY:⚽ Winner Match 91 vs Winner Match 92
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Quarter-finals · Match #99
+URL:https://worldcupyet.com/?day=2026-07-11
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-100@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260712T010000Z
+DTEND:20260712T030000Z
+SUMMARY:⚽ Winner Match 95 vs Winner Match 96
+LOCATION:Arrowhead Stadium\, Kansas City
+DESCRIPTION:FIFA World Cup 2026 · Quarter-finals · Match #100
+URL:https://worldcupyet.com/?day=2026-07-12
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-101@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260714T190000Z
+DTEND:20260714T210000Z
+SUMMARY:⚽ Winner Match 97 vs Winner Match 98
+LOCATION:AT&T Stadium\, Arlington
+DESCRIPTION:FIFA World Cup 2026 · Semi-finals · Match #101
+URL:https://worldcupyet.com/?day=2026-07-14
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-102@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260715T190000Z
+DTEND:20260715T210000Z
+SUMMARY:⚽ Winner Match 99 vs Winner Match 100
+LOCATION:Mercedes-Benz Stadium\, Atlanta
+DESCRIPTION:FIFA World Cup 2026 · Semi-finals · Match #102
+URL:https://worldcupyet.com/?day=2026-07-15
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-103@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260718T210000Z
+DTEND:20260718T230000Z
+SUMMARY:⚽ Loser Match 101 vs Loser Match 102
+LOCATION:Hard Rock Stadium\, Miami Gardens
+DESCRIPTION:FIFA World Cup 2026 · Third place · Match #103
+URL:https://worldcupyet.com/?day=2026-07-18
+END:VEVENT
+BEGIN:VEVENT
+UID:wcy-104@worldcupyet.com
+DTSTAMP:20260615T164716Z
+DTSTART:20260719T190000Z
+DTEND:20260719T210000Z
+SUMMARY:⚽ Winner Match 101 vs Winner Match 102
+LOCATION:MetLife Stadium\, East Rutherford
+DESCRIPTION:FIFA World Cup 2026 · Final · Match #104
+URL:https://worldcupyet.com/?day=2026-07-19
+END:VEVENT
+END:VCALENDAR
