@@ -9,11 +9,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const MATCHES_JSON = JSON.parse(readFileSync(join(__dirname, 'matches.json'), 'utf8'));
 const ALIASES = JSON.parse(readFileSync(join(__dirname, 'aliases.json'), 'utf8'));
 
-const BUCKET = process.env.BUCKET || 'worldcupyet.com';
+const BUCKET = process.env.BUCKET;
 const KEY = 'live.json';
-const SSM_KEY = process.env.SSM_KEY || '/worldcupyet/upstream-api-key';
+const SSM_KEY = process.env.SSM_KEY;
 const UPSTREAM_URL = process.env.UPSTREAM_URL ||
   'https://api.football-data.org/v4/competitions/WC/matches?status=LIVE,IN_PLAY,PAUSED,FINISHED';
+
+if (!BUCKET) throw new Error('BUCKET env var required');
+if (!SSM_KEY) throw new Error('SSM_KEY env var required');
 
 const ssm = new SSMClient({});
 const s3 = new S3Client({});

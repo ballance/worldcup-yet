@@ -7,19 +7,17 @@ variable "region" {
 variable "name_prefix" {
   description = "Prefix for resource names"
   type        = string
-  default     = "wcy-live-poller"
+  default     = "live-poller"
 }
 
 variable "s3_bucket" {
   description = "S3 bucket the Lambda writes live.json to"
   type        = string
-  default     = "worldcupyet.com"
 }
 
 variable "ssm_parameter_name" {
   description = "SSM SecureString holding the upstream API key"
   type        = string
-  default     = "/worldcupyet/upstream-api-key"
 }
 
 variable "schedule_expression" {
@@ -37,8 +35,5 @@ variable "lambda_bundle_path" {
 variable "tags" {
   description = "Tags applied to all resources"
   type        = map(string)
-  default = {
-    Project = "worldcupyet"
-    Feature = "live-scores"
-  }
+  default     = {}
 }

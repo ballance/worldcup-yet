@@ -135,13 +135,13 @@ Before going live, update `index.html` and `embed/countdown.html` to point at **
 cd lambda/wcy-live-poller && ./build.sh       # produces bundle.zip
 
 cd ../../infra/live-poller
+cp terraform.tfvars.example terraform.tfvars  # then edit with your values
 terraform init
-terraform plan -out tfplan \
-  -var "s3_bucket=your-bucket" \
-  -var "name_prefix=your-prefix-live-poller" \
-  -var "ssm_parameter_name=/your/upstream-api-key"
+terraform plan -out tfplan
 terraform apply tfplan
 ```
+
+`s3_bucket` and `ssm_parameter_name` are required — there are no project-specific defaults. `terraform.tfvars` is gitignored.
 
 Then put the football-data.org token into SSM:
 

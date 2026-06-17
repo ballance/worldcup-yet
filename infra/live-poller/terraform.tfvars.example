@@ -1,0 +1,8 @@
+s3_bucket          = "your-bucket.example.com"
+ssm_parameter_name = "/yourapp/upstream-api-key"
+name_prefix        = "yourapp-live-poller"
+
+tags = {
+  Project = "yourapp"
+  Feature = "live-scores"
+}
