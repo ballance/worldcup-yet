@@ -2,12 +2,12 @@
 
 > The definitive answer to the question: **Is it the World Cup?**
 
-A single-page static site that says **YES** during the FIFA World Cup 2026 tournament window and **NO** the rest of the time. Built to be:
+A single-page static site that says **YES** during the FIFA World Cup 2026 tournament window and **NO** the rest of the time.
 
-- **Single-purpose** — one question, one answer, no clutter.
-- **Privacy-first** — no cookies, no client-side tracking, no third-party scripts on the page.
-- **Cheap to run** — pure static HTML on S3 + CloudFront, plus one minute-cron Lambda for live scores. Hosting runs ~$1/month during the tournament; $0 otherwise.
-- **Pleasant to use** — gold-on-navy celebration UI, live scores, favorite-team highlighting, calendar export, embeddable widget.
+- **Single-purpose.** One question, one answer, no clutter.
+- **Privacy-first.** No cookies, no client-side analytics, no third-party scripts on the page.
+- **Cheap.** Static HTML on S3 + CloudFront, plus one minute-cron Lambda for live scores. About $1/month while the tournament is on; $0 the rest of the year.
+- **Polished.** Gold-on-navy celebration UI, live scores, favorite-team highlights, calendar export, embeddable countdown widget.
 
 Production deploy: <https://worldcupyet.com>
 
@@ -15,34 +15,34 @@ Production deploy: <https://worldcupyet.com>
 
 ## What's in the box
 
-| Layer | What it does |
+| Path | What it does |
 |---|---|
-| `index.html` | The whole site. A single HTML file with embedded CSS and JS. No build step. ~120 KB. |
-| `matches.json` | The full FIFA World Cup 2026 schedule (104 matches). Sourced from Wikipedia's per-group articles. |
-| `schedule.ics` | Calendar subscription file generated from `matches.json` by `scripts/generate-ics.py`. |
-| `og-image.png` | 1200×630 Open Graph image used in link previews. Generated from `scripts/og-source.html`. |
+| `index.html` | The whole site. One HTML file with embedded CSS + JS, no build step, ~120 KB. |
+| `matches.json` | The full 104-match FIFA World Cup 2026 schedule. Hand-curated from Wikipedia's per-group articles. |
+| `schedule.ics` | Calendar subscription file, generated from `matches.json` by `scripts/generate-ics.py`. |
+| `og-image.png` | 1200×630 Open Graph image for link previews, rendered from `scripts/og-source.html`. |
 | `embed/countdown.html` | Self-contained iframe widget anyone can drop on their own site. |
-| `embed.html` | Instructions / copy-paste page for the widget. |
+| `embed.html` | Copy-paste instructions page for the widget. |
 | `decoys/` | Honeypot endpoints for scanner traffic (`/wp-admin/install.php`, `/wp-login.php`, `/robots.txt`, etc.). |
 | `lambda/wcy-live-poller/` | Node.js 20 Lambda that polls football-data.org every minute, normalizes, writes `live.json` to S3. |
 | `infra/live-poller/` | Terraform module for the Lambda + EventBridge + IAM + SSM SecureString. |
 | `scripts/generate-ics.py` | Regenerates `schedule.ics` from `matches.json`. |
 | `scripts/og-source.html` | The HTML composition rendered once to produce `og-image.png`. |
-| `docs/` | Design specs, implementation plans, Athena query cheatsheet. |
+| `docs/` | Athena query cheatsheet for the access-log analytics. |
 | `tests/` | Browser fixtures for the live-scores feature. |
 
-The browser feature stack:
+What the page does for a visitor:
 
-- "Today's matches" panel with day navigation (arrows + URL state in `?day=YYYY-MM-DD`)
-- Live ticker layout when a match is live (sticky to top while scrolling)
-- "Your next match" surfaced when none of your teams play today
-- Favorite team + 3-team watchlist with localStorage persistence, picker modal, in-card popover
-- Group standings table per group (computed from FT scores)
-- Tournament-stage indicator, countdown to next kickoff, broadcast lines (`📺 FOX · Telemundo`)
+- "Today's matches" panel with day-by-day navigation (arrows + `?day=YYYY-MM-DD` in the URL)
+- A sticky live ticker that floats to the top while a match is in progress
+- "Your next match" surfaced when none of your teams are playing today
+- Favorite team + 3-team watchlist, persisted in localStorage, with a picker modal and in-card popover
+- Per-group standings computed from full-time scores
+- Tournament-stage indicator, countdown to the next kickoff, broadcast lines (`📺 FOX · Telemundo`)
 - "📅 Subscribe in calendar" via `webcal://`
-- Goal-flash animation + canvas particles + screen-reader announcements
-- Tab title updates with live score (`⚽ 2-1 Spain vs Cape Verde · Is it the World Cup?`)
-- Calm motion after 10s (gradient slows, balls halve)
+- Goal-flash animation, canvas particles, screen-reader announcements
+- Tab title that updates with the live score (`⚽ 2-1 Spain vs Cape Verde · Is it the World Cup?`)
+- Motion that calms down after 10 seconds — the gradient slows, half the balls disappear
 
 ---
 
@@ -82,7 +82,7 @@ The browser feature stack:
         └─────────────────────────────┘
 ```
 
-The whole runtime is two cron-driven layers — the Lambda writes once a minute, the browser polls once every 30 seconds during live windows. Nothing else moves.
+Two cron-driven layers — the Lambda writes once a minute; the browser polls every 30 seconds, but only during live windows. Nothing else moves.
 
 ---
 
@@ -90,22 +90,22 @@ The whole runtime is two cron-driven layers — the Lambda writes once a minute,
 
 ### Prerequisites
 
-- AWS account with permission to create S3 buckets, CloudFront distributions, Lambda functions, EventBridge rules, IAM roles, and SSM parameters.
-- A registered domain (or a CloudFront-default `*.cloudfront.net` URL — works fine).
-- An ACM certificate in `us-east-1` if you want HTTPS on your custom domain.
-- Terraform >= 1.6.
+- An AWS account with permission to create S3 buckets, CloudFront distributions, Lambda functions, EventBridge rules, IAM roles, and SSM parameters.
+- A registered domain (or just use the CloudFront `*.cloudfront.net` URL).
+- An ACM certificate in `us-east-1` if you want HTTPS on a custom domain.
+- Terraform ≥ 1.6.
 - Python 3.10+ (for `scripts/generate-ics.py`).
 - Node.js 20.x (for Lambda packaging).
-- An API token from [football-data.org](https://www.football-data.org/client/register) — the free tier covers the World Cup but delivers no in-match minute; the €12/month "Free w/ Livescores" tier gives real-time scores.
+- An API token from [football-data.org](https://www.football-data.org/client/register). The free tier covers the World Cup but doesn't report the in-match minute; the €12/month "Free w/ Livescores" tier does.
 
 ### Step 1 — Bucket + CloudFront
 
-Out of scope for this Terraform module. Create:
+The Terraform module here doesn't create your bucket or CloudFront distribution — that piece varies too much per AWS account. Set them up the way you usually would:
 
-- An S3 bucket (e.g., `your-domain.com`) configured for static website hosting **or** as a private bucket with CloudFront OAC/OAI.
-- A CloudFront distribution serving that bucket, with your ACM cert if using a custom domain.
+- An S3 bucket (e.g., `your-domain.com`) for static website hosting **or** a private bucket fronted by CloudFront with OAC/OAI.
+- A CloudFront distribution serving that bucket, with your ACM cert if you want a custom domain.
 
-Make a note of the **distribution ID**. You'll use it for cache invalidations.
+Note the **distribution ID** — you'll use it for cache invalidations.
 
 ### Step 2 — Upload the static assets
 
@@ -127,7 +127,7 @@ python3 scripts/generate-ics.py
 aws s3 cp schedule.ics     s3://your-bucket/schedule.ics     --content-type "text/calendar; charset=utf-8" --cache-control "public, max-age=3600"
 ```
 
-Before going live, update `index.html` and `embed/countdown.html` to point at **your** domain (replace `worldcupyet.com` references in the og-image URL, security.txt canonical, etc.).
+Before you go live, swap the `worldcupyet.com` references in `index.html` and `embed/countdown.html` for your own domain — og-image URL, security.txt canonical, and the like.
 
 ### Step 3 — Deploy the Lambda + cron
 
@@ -141,9 +141,9 @@ terraform plan -out tfplan
 terraform apply tfplan
 ```
 
-`s3_bucket` and `ssm_parameter_name` are required — there are no project-specific defaults. `terraform.tfvars` is gitignored.
+`s3_bucket` and `ssm_parameter_name` are required — no project-specific defaults. `terraform.tfvars` is gitignored.
 
-Then put the football-data.org token into SSM:
+Store your football-data.org token in SSM:
 
 ```bash
 aws ssm put-parameter \
@@ -162,11 +162,11 @@ aws lambda invoke --function-name your-prefix-live-poller \
   /tmp/wcy-dryrun.json && cat /tmp/wcy-dryrun.json | python3 -m json.tool
 ```
 
-A successful dry run returns `{"updatedUtc": "...", "matches": {...}}`. The cron will start writing the real `live.json` on its next minute boundary.
+A successful dry run returns `{"updatedUtc": "...", "matches": {...}}`. The cron picks up on the next minute boundary and starts writing the real `live.json`.
 
-### Step 4 — Optional: access logs and analytics
+### Step 4 — Optional: access logs
 
-CloudFront standard logs to S3 + Athena is a zero-client-side-code way to count visitors. See `docs/access-log-queries.md` for the setup and a SQL cheatsheet.
+CloudFront standard logs in S3, queried with Athena, count visitors without a byte of client-side JavaScript. Setup and a SQL cheatsheet are in `docs/access-log-queries.md`.
 
 ### Step 5 — Tear down
 
@@ -175,32 +175,32 @@ cd infra/live-poller
 terraform destroy
 ```
 
-The S3 bucket and CloudFront distribution stay (they weren't created by this Terraform module). Empty + delete them by hand if you're done.
+The S3 bucket and CloudFront distribution aren't owned by this module, so they stay behind. Empty and delete them by hand when you're done.
 
 ---
 
 ## Updating the schedule
 
-`matches.json` is hand-curated from Wikipedia's per-group articles. When the knockout bracket fills in:
+`matches.json` is hand-curated from Wikipedia. When the knockout bracket fills in:
 
 1. Edit `matches.json` to replace `"TBD"` codes with real team codes.
 2. Run `python3 scripts/generate-ics.py` to rebuild `schedule.ics`.
 3. Re-upload both to S3 and invalidate the CloudFront paths.
-4. Re-zip the Lambda (`./build.sh`) — it bundles its own copy of `matches.json` for the FIFA-match-id lookup table.
-5. Update the Lambda code via `aws lambda update-function-code --function-name ... --zip-file fileb://bundle.zip` or `terraform apply`.
+4. Re-zip the Lambda with `./build.sh` — it bundles its own copy of `matches.json` for the FIFA-match-id lookup table.
+5. Push the new bundle with `aws lambda update-function-code --function-name ... --zip-file fileb://bundle.zip` (or `terraform apply`).
 
 ---
 
-## Local development
+## Running locally
 
-There's no build step. To work on `index.html`:
+No build step:
 
 ```bash
 python3 -m http.server 8765 --bind 127.0.0.1
 # open http://127.0.0.1:8765
 ```
 
-Useful URL parameters for testing:
+URL parameters that make testing painless:
 
 - `?celebrate` — forces the YES state regardless of the real date.
 - `?date=2026-06-18` — overrides "today" for filtering and rendering.
@@ -209,7 +209,7 @@ Useful URL parameters for testing:
 - `?live=tests/live-fixture.json` — points `LiveScores` at a checked-in fixture instead of production.
 - `?day=2026-06-13` — navigates the day-view to a specific date.
 
-The Lambda has Node.js test coverage:
+Lambda unit tests:
 
 ```bash
 cd lambda/wcy-live-poller && node --test test/
@@ -217,33 +217,16 @@ cd lambda/wcy-live-poller && node --test test/
 
 ---
 
-## Design and implementation history
-
-Everything was built using an iterative design → plan → execute loop. The artifacts live under `docs/superpowers/`:
-
-- `docs/superpowers/specs/` — design docs per feature
-- `docs/superpowers/plans/` — task-by-task implementation plans
-
-Three major features in chronological order:
-
-1. **Daily matches panel** — `2026-06-11`
-2. **Favorite team + watchlist** — `2026-06-12`
-3. **Live scores via Lambda + S3** — `2026-06-13`
-
-If you want to understand a particular feature deeply, start with its spec, then read the corresponding plan.
-
----
-
 ## License
 
 MIT — see [`LICENSE`](LICENSE).
 
-The schedule data in `matches.json` is derived from public Wikipedia sources and is freely usable. FIFA, "World Cup," team names, and crests are trademarks of their respective owners; this site is fan-made and unaffiliated.
+The schedule data in `matches.json` is derived from public Wikipedia sources and is freely reusable. FIFA, "World Cup", team names, and crests are trademarks of their respective owners; this is a fan site, unaffiliated with any of them.
 
 ---
 
-## Acknowledgments
+## Thanks
 
-- [football-data.org](https://www.football-data.org/) — live score upstream.
-- Wikipedia's per-group articles for the 2026 World Cup schedule.
-- The folks who showed up and polled `live.json` for 20 minutes during a match — you're the audience this was built for.
+- [football-data.org](https://www.football-data.org/) for the live-score feed.
+- Wikipedia's per-group articles for the 2026 schedule data.
+- Everyone who showed up and polled `live.json` for 20 minutes during a match — you're who this was built for.
