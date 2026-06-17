@@ -28,7 +28,6 @@ Production deploy: <https://worldcupyet.com>
 | `infra/live-poller/` | Terraform module for the Lambda + EventBridge + IAM + SSM SecureString. |
 | `scripts/generate-ics.py` | Regenerates `schedule.ics` from `matches.json`. |
 | `scripts/og-source.html` | The HTML composition rendered once to produce `og-image.png`. |
-| `docs/` | Athena query cheatsheet for the access-log analytics. |
 | `tests/` | Browser fixtures for the live-scores feature. |
 
 What the page does for a visitor:
@@ -164,11 +163,7 @@ aws lambda invoke --function-name your-prefix-live-poller \
 
 A successful dry run returns `{"updatedUtc": "...", "matches": {...}}`. The cron picks up on the next minute boundary and starts writing the real `live.json`.
 
-### Step 4 — Optional: access logs
-
-CloudFront standard logs in S3, queried with Athena, count visitors without a byte of client-side JavaScript. Setup and a SQL cheatsheet are in `docs/access-log-queries.md`.
-
-### Step 5 — Tear down
+### Step 4 — Tear down
 
 ```bash
 cd infra/live-poller
