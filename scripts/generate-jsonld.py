@@ -35,6 +35,8 @@ def add_min(iso_utc: str, minutes: int) -> str:
 
 def build_graph(data: dict) -> dict:
     tournament_id = f"{SITE}/#fifa-world-cup-2026"
+    fifa_id = f"{SITE}/#fifa"
+    image_url = f"{SITE}/og-image.png"
     graph: list[dict] = [
         {
             "@type": "WebSite",
@@ -48,6 +50,12 @@ def build_graph(data: dict) -> dict:
             ),
         },
         {
+            "@type": "Organization",
+            "@id": fifa_id,
+            "name": "FIFA",
+            "url": "https://www.fifa.com/",
+        },
+        {
             "@type": "SportsEvent",
             "@id": tournament_id,
             "name": "FIFA World Cup 2026",
@@ -58,9 +66,11 @@ def build_graph(data: dict) -> dict:
             "startDate": "2026-06-11",
             "endDate": "2026-07-19",
             "url": SITE,
+            "image": image_url,
             "eventStatus": "https://schema.org/EventScheduled",
             "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
             "sport": "Soccer",
+            "organizer": {"@id": fifa_id},
             "location": [
                 {"@type": "Country", "name": "Canada"},
                 {"@type": "Country", "name": "Mexico"},
@@ -74,6 +84,8 @@ def build_graph(data: dict) -> dict:
         if tz not in TZ_TO_COUNTRY:
             raise SystemExit(f"unmapped tz: {tz!r} (add to TZ_TO_COUNTRY)")
         day = m["kickoffUtc"][:10]
+        home_team = {"@type": "SportsTeam", "name": m["home"]["name"]}
+        away_team = {"@type": "SportsTeam", "name": m["away"]["name"]}
         graph.append(
             {
                 "@type": "SportsEvent",
@@ -83,9 +95,11 @@ def build_graph(data: dict) -> dict:
                 "startDate": m["kickoffUtc"],
                 "endDate": add_min(m["kickoffUtc"], MATCH_DURATION_MIN),
                 "url": f"{SITE}/?day={day}",
+                "image": image_url,
                 "eventStatus": "https://schema.org/EventScheduled",
                 "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
                 "sport": "Soccer",
+                "organizer": {"@id": fifa_id},
                 "location": {
                     "@type": "Place",
                     "name": m["venue"]["stadium"],
@@ -95,8 +109,9 @@ def build_graph(data: dict) -> dict:
                         "addressCountry": TZ_TO_COUNTRY[tz],
                     },
                 },
-                "homeTeam": {"@type": "SportsTeam", "name": m["home"]["name"]},
-                "awayTeam": {"@type": "SportsTeam", "name": m["away"]["name"]},
+                "homeTeam": home_team,
+                "awayTeam": away_team,
+                "performer": [home_team, away_team],
                 "superEvent": {"@id": tournament_id},
             }
         )
